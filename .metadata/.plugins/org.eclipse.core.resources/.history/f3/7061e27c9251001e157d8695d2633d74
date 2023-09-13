@@ -1,0 +1,8 @@
+
+Feature: To Test Login functionality
+
+  Scenario: Check Login functionality
+    Given User navigate to shop page
+    When User Clicked the signin button
+    And User provided username <Bighnesh> and password <Bighnesh@1231>
+    Then user able to see Sign out button

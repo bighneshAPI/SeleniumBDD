@@ -1,0 +1,120 @@
+package StepDefinitions;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import java.util.Base64;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+
+public class LoginSteps {
+	ExtentReports extent= new ExtentReports();
+	ExtentSparkReporter spark= new ExtentSparkReporter("ExtentReport.html");
+	
+	@BeforeTest
+	public void beforeTest()
+	{
+		
+		extent.attachReporter(spark);
+	}
+	WebDriver driver;
+	
+	@Test
+	@Given("User navigate to shop page")
+	public void user_navigate_to_shop_page() {
+	System.out.println("Test");
+	
+	ExtentTest test = extent.createTest("Launch Browser and WEBSITE");
+	
+	String projectpath = System.getProperty("user.dir");
+	System.out.println("Project path is "+projectpath);
+	
+	System.setProperty("webdriver.chrome.driver", projectpath+"/src/test/resources/drivers/chromedriver.exe");	
+	ChromeOptions ops = new ChromeOptions();
+	ops.addArguments("--remote-allow-origins=*");
+	
+    driver= new ChromeDriver(ops);	
+    
+    test.log(Status.PASS, "Chrome Browser Opened");
+    test.pass("Browser Opened successfully");
+    
+    driver.manage().window().maximize();
+    driver.get("https://petstore.octoperf.com/");
+    
+		
+	}
+
+	@Test
+	@When("User Clicked the signin button")
+	public void user_clicked_the_signin_button() {
+		
+	ExtentTest test = extent.createTest("Launch Browser and WEBSITE");
+	
+	driver.findElement(By.xpath("//*[@id=\"Content\"]/p[1]/a")).click();
+	driver.findElement(By.linkText("Sign In")).click();
+	
+	test.log(Status.PASS, "User clicked Signin button");
+    test.pass("Signin button clicked successfully");
+	
+	}
+	
+	@Test
+	@And("User provided username and password")
+	public void user_provided_username_and_password() throws Exception {
+		Thread.sleep(2000);
+		
+		ExtentTest test = extent.createTest("Provide the username and password");
+		
+		driver.findElement(By.name("username")).sendKeys("Bighnesh");
+		driver.findElement(By.name("password")).clear();
+		
+		driver.findElement(By.name("password")).sendKeys(decodeString("QmlnaG5lc2hAMTIzMQ=="));
+		
+		test.log(Status.PASS, "User provided username and password");
+	    test.pass("User provided username and password successfully");
+	    
+		}
+		
+	static String decodeString(String Password) {
+			
+		byte[] decrypt= Base64.getDecoder().decode(Password);
+		return (new String(decrypt));
+			
+	}
+	
+	@Test
+	@And("User clicked the Login button")
+	public void user_clicked_the_login_button() throws Exception {
+	
+	Thread.sleep(2000);
+	driver.findElement(By.name("signon")).click();
+		
+	}
+
+	@Test
+	@Then("user able to see Sign out button")
+	public void user_able_to_see_sign_out_button() {
+		
+	WebElement signout = driver.findElement(By.xpath("//*[@id=\"MenuContent\"]/a[2]"));
+	
+	Assert.assertEquals(true, signout.isDisplayed());
+	
+	System.out.println("Signout button is displayed");
+	
+	}
+
+}

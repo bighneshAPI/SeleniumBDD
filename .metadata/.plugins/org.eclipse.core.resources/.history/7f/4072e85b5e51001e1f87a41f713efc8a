@@ -1,0 +1,8 @@
+Feature: Login functionality
+
+  Scenario: Check login functionality
+    
+    Given: User navigate to shop page
+    When: User clicked on Signin button
+    And User provide username <Bighnesh> and password<Bighnesh@1231>
+    Then Sign out button should be displayed

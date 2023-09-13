@@ -1,0 +1,89 @@
+package StepDefinitions;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.util.Base64;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+
+
+public class Login {
+
+	WebDriver driver;
+	
+	@Given("User navigate to shop page")
+	public void user_navigate_to_shop_page() {
+	System.out.println("Test");
+
+	String projectpath = System.getProperty("user.dir");
+	System.out.println("Project path is "+projectpath);
+	
+	System.setProperty("webdriver.chrome.driver", projectpath+"/src/test/resources/drivers/chromedriver.exe");	
+	ChromeOptions ops = new ChromeOptions();
+	ops.addArguments("--remote-allow-origins=*");
+	
+    driver= new ChromeDriver(ops);	
+    driver.manage().window().maximize();
+    driver.get("https://petstore.octoperf.com/");
+  	
+	}
+	
+	@When("User Clicked the signin button")
+	public void user_clicked_the_signin_button() {
+	
+	driver.findElement(By.xpath("//*[@id=\"Content\"]/p[1]/a")).click();
+	driver.findElement(By.linkText("Sign In")).click();
+	
+	String title = driver.getTitle();
+	System.out.println("title of the page is "+title);
+	Assert.assertEquals("JPetStore Demo", "JPetStore Demo");
+
+	}
+	
+	@And("User provided username and password")
+	public void user_provided_username_and_password() throws Exception {
+		Thread.sleep(2000);
+	
+		driver.findElement(By.name("username")).sendKeys("Bighnesh");
+		driver.findElement(By.name("password")).clear();
+		
+		driver.findElement(By.name("password")).sendKeys(decodeString("QmlnaG5lc2hAMTIzMQ=="));
+	    
+		}
+		
+	static String decodeString(String Password) {
+			
+		byte[] decrypt= Base64.getDecoder().decode(Password);
+		return (new String(decrypt));
+			
+	}
+	
+	@And("User clicked the Login button")
+	public void user_clicked_the_login_button() throws Exception {
+	
+	Thread.sleep(2000);
+	driver.findElement(By.name("signon")).click();
+		
+	}
+
+	@Then("user able to see Sign out button")
+	public void user_able_to_see_sign_out_button() {
+		
+	WebElement signout = driver.findElement(By.xpath("//*[@id=\"MenuContent\"]/a[2]"));
+	
+	Assert.assertEquals(true, signout.isDisplayed());
+	
+	System.out.println("Signout button is displayed");
+	
+	}
+
+}

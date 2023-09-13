@@ -1,0 +1,6 @@
+<h2>Methods that were not run</h2><table>
+<tr><td>StepDefinitions.LoginSteps.user_clicked_the_signin_button</td></tr>
+<tr><td>StepDefinitions.LoginSteps.user_provided_username_and_password</td></tr>
+<tr><td>StepDefinitions.LoginSteps.user_navigate_to_shop_page</td></tr>
+<tr><td>StepDefinitions.LoginSteps.user_clicked_the_login_button</td></tr>
+</table>

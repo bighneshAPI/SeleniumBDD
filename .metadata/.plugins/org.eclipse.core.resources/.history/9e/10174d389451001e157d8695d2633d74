@@ -1,0 +1,57 @@
+package StepDefinitions;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class LoginSteps {
+	WebDriver driver;
+	
+	@Given("User navigate to shop page")
+	public void user_navigate_to_shop_page() {
+	System.out.println("Test");
+	
+	System.setProperty("webdriver.chrome.driver", "D:/Selenium-BDD_Demo/SeleniumDemo/src/test/resources/drivers/chromedriver.exe");	
+	ChromeOptions ops = new ChromeOptions();
+	ops.addArguments("--remote-allow-origins=*");
+	
+    driver= new ChromeDriver(ops);	
+    
+    driver.manage().window().maximize();
+    driver.get("https://petstore.octoperf.com/");
+		
+	}
+
+	@When("User Clicked the signin button")
+	public void user_clicked_the_signin_button() {
+	
+	driver.findElement(By.xpath("//*[@id=\"Content\"]/p[1]/a")).click();
+	
+	driver.findElement(By.linkText("Sign In")).click();
+	}
+
+	@And("User provided username <Bighnesh> and password <Bighnesh@{int}>")
+	public void user_provided_username_bighnesh_and_password_bighnesh(Integer int1) {
+	
+		driver.findElement(By.name("username")).sendKeys("Bighnesh");
+		driver.findElement(By.name("password")).sendKeys("Bighnesh@1231");
+	}
+	
+	@And("User clicked the Login button")
+	public void user_clicked_the_login_button() {
+		driver.findElement(By.name("signon")).click();;
+	}
+
+
+	@Then("user able to see Sign out button")
+	public void user_able_to_see_sign_out_button() {
+		System.out.println("Test");
+	}
+
+}

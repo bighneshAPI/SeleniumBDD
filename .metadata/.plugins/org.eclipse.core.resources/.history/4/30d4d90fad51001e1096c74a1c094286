@@ -1,0 +1,49 @@
+package StepDefinitions;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+
+import com.cucumber.listener.ExtentProperties;
+import com.cucumber.listener.Reporter;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import java.io.File;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features="src/test/resources/features",glue= {"StepDefinitions"},
+monochrome=true,
+plugin = { "pretty", "junit:target/JnuitReports/report.xml",
+		"json:target/JSONReports/report.json",
+		"html:target/HTMLReport/Htmlreports",
+	 "com.cucumber.listener.ExtentCucumberFormatter:target/report.html" }
+	
+
+)
+
+public class TestRunner {
+
+	    @BeforeClass
+	    public static void setup() {
+	        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+	        ExtentProperties extentProperties = ExtentProperties.INSTANCE;
+	        extentProperties.setReportPath("cucumber-reports/"+timeStamp.replace(":","_").replace(".","_")+".html");
+	    }
+
+
+	    @AfterClass
+	    public static void writeExtentReport() {
+
+	        Reporter.loadXMLConfig(new File("src/main/java/config/extent-config.xml"));
+	        Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
+	        Reporter.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
+	      }
+	    }
+	
+	
+
+

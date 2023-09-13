@@ -1,0 +1,40 @@
+package com.qa.util;
+
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class TestBase {
+	
+	public static WebDriver driver;
+	public static Properties prop;
+	
+	public static void initialization() {
+		String browsername= prop.getProperty("browser");
+		
+		if (browsername.equals("chrome")) {
+			
+			String projectpath = System.getProperty("user.dir");
+			System.out.println("Project path is "+projectpath);
+			
+			System.setProperty("webdriver.chrome.driver", projectpath+"/src/test/resources/drivers/chromedriver.exe");	
+			ChromeOptions ops = new ChromeOptions();
+			ops.addArguments("--remote-allow-origins=*");
+			
+		    driver= new ChromeDriver(ops);	
+		    driver.manage().window().maximize();
+		    driver.manage().deleteAllCookies();
+		    
+		    driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+		    driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
+		   
+		    
+		    driver.get(prop.getProperty("url"));
+		}
+		
+	}
+
+}

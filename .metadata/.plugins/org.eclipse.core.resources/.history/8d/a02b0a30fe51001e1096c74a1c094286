@@ -1,0 +1,22 @@
+package com.qa.page;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class LoginPage {
+	
+	@FindBy(xpath="//*[@id=\\\"Content\\\"]/p[1]/a")
+	WebElement SignInBtn;
+	
+	@FindBy(xpath="username")
+	WebElement username;
+	
+	@FindBy(xpath="password")
+	WebElement password;
+	
+	@FindBy(xpath="//*[@id=\\\"Content\\\"]/p[1]/a")
+	WebElement SignIn;
+	
+	
+
+}

@@ -1,0 +1,6 @@
+
+Feature: To Test Login functionality
+
+  Scenario: Check Login functionality
+    Given User navigate to shop page
+  

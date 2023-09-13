@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="21.55" tests="4" skipped="0" failures="2" errors="0">
+<testcase classname="To Test Logout functionality" name="Check Logout functionality" time="0.024">
+<failure type="java.lang.NullPointerException" message="Cannot invoke &quot;org.openqa.selenium.WebElement.click()&quot; because &quot;com.qa.page.LogOutPage.LogOutBtn&quot; is null">
+<![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebElement.click()" because "com.qa.page.LogOutPage.LogOutBtn" is null
+	at com.qa.page.LogOutPage.LogOutBtn(LogOutPage.java:22)
+	at StepDefinitions.LogOut.user_clicked_the_sign_out_button(LogOut.java:21)
+	at ✽.user clicked the Sign out button(file:///D:/Selenium-BDD_Demo/SeleniumDemo/src/test/resources/features/LogOut.feature:4)
+]]>
+</failure>
+<system-out><![CDATA[
+When user clicked the Sign out button.......................................failed
+Then User able to signout successfully......................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="To Test Login functionality" name="Check Login functionality" time="14.002">
+<system-out><![CDATA[
+Given User navigate to shop page............................................passed
+When User Clicked the signin button.........................................passed
+And User provided username and password.....................................passed
+And User clicked the Login button...........................................passed
+Then user able to see Sign out button.......................................passed
+]]></system-out>
+</testcase>
+<testcase classname="To Test Login functionality" name="Check Login functionality" time="7.354">
+<system-out><![CDATA[
+Given User navigate to shop page............................................passed
+When User Clicked the signin button.........................................passed
+And User provided username and password.....................................passed
+And User clicked the Login button...........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="To Test Login functionality" name="Check Login functionality" time="0.005">
+<failure type="java.lang.NullPointerException" message="Cannot invoke &quot;org.openqa.selenium.WebDriver.getTitle()&quot; because &quot;com.qa.page.LoginPage.driver&quot; is null">
+<![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.getTitle()" because "com.qa.page.LoginPage.driver" is null
+	at com.qa.page.LoginPage.LoginTitle(LoginPage.java:45)
+	at StepDefinitions.LoginPage1.user_clicked_the_signin_button(LoginPage1.java:31)
+	at ✽.User Clicked the signin b1utton(file:///D:/Selenium-BDD_Demo/SeleniumDemo/src/test/resources/features/LoginPage1.feature:5)
+]]>
+</failure>
+<system-out><![CDATA[
+Given User navigate to shop p1age...........................................passed
+When User Clicked the signin b1utton........................................failed
+And User provided username and p1assword....................................skipped
+And User clicked the Login b1utton..........................................skipped
+]]></system-out>
+</testcase>
+</testsuite>
