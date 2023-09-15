@@ -6,6 +6,8 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import com.aventstack.extentreports.model.Log;
 import com.qa.page.LoginPage;
 import com.qa.util.TestBase;
 
@@ -35,6 +37,7 @@ public class LoginPage1 extends TestBase{
 	Assert.assertEquals("JPetStore Demo", "JPetStore Demo");
 	
 	LoginPage.ClickLoginBtn();
+	
 
 	}
 	
